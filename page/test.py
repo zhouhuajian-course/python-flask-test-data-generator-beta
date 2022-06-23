@@ -4,11 +4,10 @@
 @author  : zhouhuajian
 @version : v1.0
 """
+
 import mimetypes
 import os
-
 from flask import Blueprint, render_template, make_response
-
 from db.test import TestData
 
 # 测试蓝图

@@ -4,6 +4,7 @@
 @author  : zhouhuajian
 @version : v1.0
 """
+
 import random
 
 from flask import Blueprint, redirect, request

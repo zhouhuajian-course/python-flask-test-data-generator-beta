@@ -4,6 +4,7 @@
 @author  : zhouhuajian
 @version : v1.0
 """
+
 from flask_sqlalchemy import SQLAlchemy
 
 # 数据库db对象
