@@ -20,6 +20,16 @@
                     </button>
                 </div>
             </form>
+            <form class="row mt-3" action="/api/test/emoji" method="post">
+                <div class="col-8">
+                    <input required type="text" name="size" class="form-control" placeholder="表情长度">
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">
+                        生成表情
+                    </button>
+                </div>
+            </form>
             <form class="row mt-3 mb-3" action="/api/test/file" method="post">
                 <div class="col-4">
                     <input required type="text" name="filename" class="form-control" placeholder="文件名">
@@ -51,6 +61,8 @@
                     <td>{{ row.type }}</td>
                     <td>{{ row.size }}</td>
                     <td>{% if row.type == 'text' %}
+                        {{ row.data }}
+                        {% elif row.type == 'emoji' %}
                         {{ row.data }}
                         {% else %}
                         <a target="_blank" href="/test/file/{{ row.id }}">{{ row.data }}</a>
