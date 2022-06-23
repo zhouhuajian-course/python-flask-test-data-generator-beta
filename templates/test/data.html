@@ -1,33 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>测试数据生成器</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
 </head>
 <body>
-<form action="/api/test/text" method="post">
-    文字长度：<input name="size" value="10" />
-    <button type="submit">生成</button>
-</form>
-<form action="/api/test/file" method="post">
-    文件名：<input name="filename" value="a.txt" />
-    文件大小(B)：<input name="size" value="10" />
-    <button type="submit">生成</button>
-</form>
-<h3>测试数据生成历史：</h3>
-<ul>
-    {% for row in rows %}
-    <li>
-        ID: {{ row.id }}
-        类型: {{ row.type }}
-        长度：{{ row.size }}
-        {% if row.type == 'text' %}
-        内容：{{ row.data }}
-        {% else %}
-        文件：<a target="_blank" href="/test/file/{{ row.id }}">下载</a>
-        {% endif %}
-    </li>
-    {% endfor %}
-</ul>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <form class="row mt-3" action="/api/test/text" method="post">
+                <div class="col-8">
+                    <input required type="text" name="size" class="form-control" placeholder="文本长度">
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">
+                        生成文本
+                    </button>
+                </div>
+            </form>
+            <form class="row mt-3 mb-3" action="/api/test/file" method="post">
+                <div class="col-4">
+                    <input required type="text" name="filename" class="form-control" placeholder="文件名">
+                </div>
+                 <div class="col-4">
+                    <input required type="text" name="size" class="form-control" placeholder="文件大小(Byte)">
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">
+                        生成文件
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">类型</th>
+                    <th scope="col">大小</th>
+                    <th scope="col">内容</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for row in rows %}
+                <tr>
+                    <th scope="row">{{ row.id }}</th>
+                    <td>{{ row.type }}</td>
+                    <td>{{ row.size }}</td>
+                    <td>{% if row.type == 'text' %}
+                        {{ row.data }}
+                        {% else %}
+                        <a target="_blank" href="/test/file/{{ row.id }}">{{ row.data }}</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
