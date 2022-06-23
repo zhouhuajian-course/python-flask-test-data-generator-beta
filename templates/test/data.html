@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试数据生成器</title>
+</head>
+<body>
+<form action="/api/test/text" method="post">
+    文字长度：<input name="size" value="10" />
+    <button type="submit">生成</button>
+</form>
+<form action="/api/test/file" method="post">
+    文件名：<input name="filename" value="a.txt" />
+    文件大小(B)：<input name="size" value="10" />
+    <button type="submit">生成</button>
+</form>
+<h3>测试数据生成历史：</h3>
+<ul>
+    {% for row in rows %}
+    <li>
+        ID: {{ row.id }}
+        类型: {{ row.type }}
+        长度：{{ row.size }}
+        {% if row.type == 'text' %}
+        内容：{{ row.data }}
+        {% else %}
+        文件：<a target="_blank" href="/test/file/{{ row.id }}">下载</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+</body>
+</html>
